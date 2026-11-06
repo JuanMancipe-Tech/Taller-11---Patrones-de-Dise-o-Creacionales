@@ -1,20 +1,45 @@
-# Taller 11 · Ejercicio 2 — BancoPlata
+# Ejercicio 2. BancoPlata
 
-Programación 1 (POO) · Universidad Libre · Docente: Andrés Castaño
+## Patrón aplicado: Factory Method
 
-## Situación
-El banco notifica por SMS, correo y push. Ahora quiere agregar WhatsApp, y cada canal nuevo obliga a tocar varios `if/else` repetidos.
+### Descripción
+Este ejercicio busca organizar la creación de diferentes tipos de notificaciones bancarias utilizando una fábrica.
 
-## Cómo ejecutar
+### Problema identificado
+La clase `ServicioNotificaciones` repetía estructuras condicionales `if / else if` para crear los objetos correspondientes a cada canal de notificación. Agregar un nuevo canal implicaba modificar repetidamente la lógica del servicio.
+
+### Solución implementada
+Se creó una interfaz `Notificacion` para establecer un método común `enviar()`. Posteriormente, se implementó una fábrica encargada de crear las notificaciones según el canal solicitado.
+
+Se registraron los siguientes canales:
+- SMS.
+- EMAIL.
+- PUSH.
+- WHATSAPP.
+
+La clase `ServicioNotificaciones` ahora solicita el objeto a `NotificacionFactory`, sin encargarse directamente de su creación.
+
+### Resultado
+El sistema puede enviar notificaciones mediante diferentes canales. Se agregó WhatsApp sin modificar la lógica interna de `ServicioNotificaciones`.
+
+### Archivos principales
+- `Notificacion.java`
+- `Sms.java`
+- `Email.java`
+- `Push.java`
+- `WhatsApp.java`
+- `NotificacionFactory.java`
+- `ServicioNotificaciones.java`
+- `Main.java`
+
+### Ejecución
 ```bash
 javac -d out src/*.java
 java -cp out Main
 ```
-Al final de la salida, la línea **ESPERADO** dice cómo debe verse el programa cuando quede corregido.
 
-## Qué hacer
-1. Ejecute el código tal como está y observe la diferencia con lo **ESPERADO**.
-2. Identifique en el código la(s) línea(s) que delatan el problema.
-3. Decida qué patrón creacional aplica (Singleton, Factory Method o Builder) y refactorice.
-4. Ajuste `Main.java` solo en lo necesario para usar su solución (no borre los casos de prueba).
-5. Haga commit y push de su solución en este repositorio.
+### Resultado esperado
+El programa debe mostrar las notificaciones enviadas por SMS, EMAIL, PUSH y WHATSAPP.
+
+### Autor
+Solución desarrollada para el Taller 11 de patrones de diseño.

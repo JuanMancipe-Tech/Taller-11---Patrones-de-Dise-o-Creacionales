@@ -1,24 +1,41 @@
-# Taller 11 · Ejercicio 1 — Domicilios Rappi
+# Ejercicio 1. DomiciliosRapidito
 
-Programación 1 (POO) · Universidad Libre · Docente: Andrés Castaño
+## Patrón aplicado: Singleton
 
-## Situación
+### Descripción
+Este ejercicio consiste en implementar el patrón Singleton para garantizar que toda la aplicación utilice una única instancia de la clase `ConfiguracionApp`.
 
-El administrador activa el recargo por lluvia, pero el cliente sigue viendo el precio normal y el repartidor no recibe el recargo. Además, la configuración se lee del disco cada vez que alguien la necesita.
+### Problema identificado
+Las clases `AppRepartidor`, `CalculadoraDomicilio` y `PanelAdmin` creaban instancias independientes de `ConfiguracionApp` mediante el operador `new`. Esto provocaba que cada clase pudiera manejar configuraciones diferentes.
 
-## Cómo ejecutar
+### Solución implementada
+Se implementó el patrón Singleton mediante:
+- Un atributo estático privado para almacenar la instancia.
+- Un constructor privado para impedir la creación de objetos desde otras clases.
+- Un método estático `getInstance()` para obtener la instancia compartida.
 
+Se modificaron las clases que utilizaban la configuración para acceder a través de `ConfiguracionApp.getInstance()`.
+
+### Resultado
+La aplicación utiliza una única configuración compartida. El recargo por lluvia establecido desde el panel administrativo también se aplica al cálculo del domicilio y a las ganancias del repartidor.
+
+### Archivos principales
+- `ConfiguracionApp.java`
+- `PanelAdmin.java`
+- `CalculadoraDomicilio.java`
+- `AppRepartidor.java`
+- `Main.java`
+
+### Ejecución
 ```bash
 javac -d out src/*.java
 java -cp out Main
 ```
 
-Al final de la salida, la línea **ESPERADO** dice cómo debe verse el programa cuando quede corregido.
+### Resultado esperado
+- Precio del domicilio: 8900.
+- Ganancia del repartidor: 4400.
+- La configuración se carga una sola vez.
 
-## Qué hacer
-
-1. Ejecute el código tal como está y observe la diferencia con lo **ESPERADO**.
-2. Identifique en el código la(s) línea(s) que delatan el problema.
-3. Decida qué patrón creacional aplica (Singleton, Factory Method o Builder) y refactorice.
-4. Ajuste `Main.java` solo en lo necesario para usar su solución (no borre los casos de prueba).
-5. Haga commit y push de su solución en este repositorio.
+### Autor
+Solución desarrollada para el Taller 11 de patrones de diseño.

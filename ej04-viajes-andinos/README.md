@@ -1,20 +1,41 @@
-# Taller 11 · Ejercicio 4 — Viajes Andinos
+# Ejercicio 4. Viajes Andinos
 
-Programación 1 (POO) · Universidad Libre · Docente: Andrés Castaño
+## Patrón aplicado: Builder
 
-## Situación
-Los asesores arman paquetes con constructores sobrecargados y setters: no se sabe qué constructor usar y salen paquetes sin destino o con 0 noches.
+### Descripción
+Este ejercicio consiste en implementar el patrón Builder para construir paquetes turísticos con diferentes servicios opcionales.
 
-## Cómo ejecutar
+### Problema identificado
+La clase `PaqueteViaje` tenía varios constructores sobrecargados y setters que permitían crear objetos incompletos o modificar sus atributos después de construirlos.
+
+### Solución implementada
+Se implementó una clase interna `Builder` con métodos para agregar servicios opcionales como:
+- Vuelo.
+- Hotel.
+- Desayuno.
+- Tour.
+- Seguro de viaje.
+
+Se establecieron destino y noches como datos obligatorios y se implementaron validaciones mediante `IllegalArgumentException`.
+
+### Inmutabilidad
+Se declararon los atributos como `private final`, se eliminó el constructor público y se quitaron los setters. De esta manera, los paquetes no pueden modificarse después de su construcción.
+
+### Resultado
+Los paquetes se construyen de forma clara y organizada. Los paquetes sin destino o con menos de una noche son rechazados mediante validaciones.
+
+### Archivos principales
+- `PaqueteViaje.java`
+- `Main.java`
+
+### Ejecución
 ```bash
 javac -d out src/*.java
 java -cp out Main
 ```
-Al final de la salida, la línea **ESPERADO** dice cómo debe verse el programa cuando quede corregido.
 
-## Qué hacer
-1. Ejecute el código tal como está y observe la diferencia con lo **ESPERADO**.
-2. Identifique en el código la(s) línea(s) que delatan el problema.
-3. Decida qué patrón creacional aplica (Singleton, Factory Method o Builder) y refactorice.
-4. Ajuste `Main.java` solo en lo necesario para usar su solución (no borre los casos de prueba).
-5. Haga commit y push de su solución en este repositorio.
+### Resultado esperado
+Se deben mostrar los paquetes de Cartagena y Villa de Leyva. Los paquetes sin destino o con cero noches deben ser rechazados.
+
+### Autor
+Solución desarrollada para el Taller 11 de patrones de diseño.

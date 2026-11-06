@@ -1,20 +1,43 @@
-# Taller 11 · Ejercicio 5 — EPS SaludYa
+# Ejercicio 5. EPSSaludYa
 
-Programación 1 (POO) · Universidad Libre · Docente: Andrés Castaño
+## Patrón aplicado: Singleton
 
-## Situación
-Las ventanillas y el kiosco digital entregan el mismo número de turno a pacientes distintos.
+### Descripción
+Este ejercicio consiste en implementar el patrón Singleton para garantizar que todas las ventanillas y el kiosco digital compartan un único generador de turnos.
 
-## Cómo ejecutar
+### Problema identificado
+Las clases `Ventanilla` y `KioscoDigital` creaban instancias independientes de `GeneradorTurnos` utilizando `new GeneradorTurnos()`. Esto provocaba que cada punto de atención tuviera su propio consecutivo y que se pudieran repetir los números de turno.
+
+### Solución implementada
+Se implementó el patrón Singleton en la clase `GeneradorTurnos` mediante:
+- Una instancia estática privada.
+- Un constructor privado.
+- Un método estático `getInstance()` para obtener la instancia compartida.
+
+Las clases `Ventanilla` y `KioscoDigital` fueron modificadas para utilizar `GeneradorTurnos.getInstance()`.
+
+### Resultado
+Todos los puntos de atención utilizan el mismo generador de turnos, garantizando una secuencia consecutiva desde `T-001` hasta `T-005` y evitando la repetición de turnos.
+
+### Archivos principales
+- `GeneradorTurnos.java`
+- `Ventanilla.java`
+- `KioscoDigital.java`
+- `Main.java`
+
+### Ejecución
 ```bash
 javac -d out src/*.java
 java -cp out Main
 ```
-Al final de la salida, la línea **ESPERADO** dice cómo debe verse el programa cuando quede corregido.
 
-## Qué hacer
-1. Ejecute el código tal como está y observe la diferencia con lo **ESPERADO**.
-2. Identifique en el código la(s) línea(s) que delatan el problema.
-3. Decida qué patrón creacional aplica (Singleton, Factory Method o Builder) y refactorice.
-4. Ajuste `Main.java` solo en lo necesario para usar su solución (no borre los casos de prueba).
-5. Haga commit y push de su solución en este repositorio.
+### Resultado esperado
+Se deben generar cinco turnos consecutivos:
+- T-001: Martha.
+- T-002: Jorge.
+- T-003: Valentina.
+- T-004: Luis.
+- T-005: Camila.
+
+### Autor
+Solución desarrollada para el Taller 11 de patrones de diseño.
